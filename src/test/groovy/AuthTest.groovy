@@ -1,6 +1,6 @@
 import com.epam.reportportal.junit5.ReportPortalExtension
 import groovy.util.logging.Slf4j
-import orcun.balcilar.gpost.teststep.request.auth.BasicAuth
+import io.github.orcunbalcilar.gpost.teststep.request.auth.BasicAuth
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

@@ -2,12 +2,12 @@ package io.github.orcunbalcilar.gpost.teststep
 
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
-import orcun.balcilar.gpost.TestItemStatus
-import orcun.balcilar.gpost.testcase.TestCaseRunContext
-import orcun.balcilar.gpost.teststep.request.GetRequest
-import orcun.balcilar.gpost.teststep.request.auth.HasAuth
-import orcun.balcilar.gpost.teststep.response.Assertions
-import orcun.balcilar.gpost.teststep.response.JsonAssertions
+import io.github.orcunbalcilar.gpost.TestItemStatus
+import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
+import io.github.orcunbalcilar.gpost.teststep.request.GetRequest
+import io.github.orcunbalcilar.gpost.teststep.request.auth.HasAuth
+import io.github.orcunbalcilar.gpost.teststep.response.Assertions
+import io.github.orcunbalcilar.gpost.teststep.response.JsonAssertions
 import org.apache.hc.client5.http.async.methods.SimpleHttpRequest
 import org.apache.hc.client5.http.async.methods.SimpleHttpResponse
 import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient

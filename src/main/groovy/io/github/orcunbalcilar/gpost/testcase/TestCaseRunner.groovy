@@ -1,7 +1,7 @@
 package io.github.orcunbalcilar.gpost.testcase
 
 import groovy.transform.CompileStatic
-import orcun.balcilar.gpost.TestItemStatus
+import io.github.orcunbalcilar.gpost.TestItemStatus
 
 @CompileStatic
 class TestCaseRunner {

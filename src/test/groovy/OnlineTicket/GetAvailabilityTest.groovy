@@ -1,14 +1,14 @@
 package OnlineTicket
 
 import com.epam.reportportal.junit5.ReportPortalExtension
-import orcun.balcilar.gpost.ArgumentsSourceProvider
-import orcun.balcilar.gpost.JUnit5TestSuite
-import orcun.balcilar.gpost.testcase.TestCase
+import io.github.orcunbalcilar.gpost.ArgumentsSourceProvider
+import io.github.orcunbalcilar.gpost.JUnit5TestSuite
+import io.github.orcunbalcilar.gpost.testcase.TestCase
 import org.junit.jupiter.api.extension.ExtendWith
 
 import java.time.LocalDate
 
-import static orcun.balcilar.gpost.testcase.TestCaseBuilder.testCase
+import static io.github.orcunbalcilar.gpost.testcase.TestCaseBuilder.testCase
 
 @ExtendWith(ReportPortalExtension.class)
 class GetAvailabilityTest extends JUnit5TestSuite<Integer> {

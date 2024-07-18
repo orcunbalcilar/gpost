@@ -2,10 +2,10 @@ package io.github.orcunbalcilar.gpost.teststep
 
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
+import io.github.orcunbalcilar.gpost.TestItemStatus
 import io.github.orcunbalcilar.gpost.testcase.ContextAccess
-import orcun.balcilar.gpost.TestItemStatus
-import orcun.balcilar.gpost.testcase.TestCase
-import orcun.balcilar.gpost.testcase.TestCaseRunContext
+import io.github.orcunbalcilar.gpost.testcase.TestCase
+import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
 import org.slf4j.Logger
 
 @CompileStatic

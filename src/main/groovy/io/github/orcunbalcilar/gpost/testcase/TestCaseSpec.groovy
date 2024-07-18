@@ -5,7 +5,7 @@ import groovy.util.logging.Slf4j
 import io.github.orcunbalcilar.gpost.teststep.GetTestStep
 import io.github.orcunbalcilar.gpost.teststep.GroovyScriptTestStep
 import io.github.orcunbalcilar.gpost.teststep.PostTestStep
-import orcun.balcilar.gpost.teststep.request.auth.HasAuth
+import io.github.orcunbalcilar.gpost.teststep.request.auth.HasAuth
 
 @CompileStatic
 @Slf4j

@@ -1,7 +1,7 @@
 package io.github.orcunbalcilar.gpost.teststep
 
 import groovy.transform.CompileStatic
-import orcun.balcilar.gpost.TestItemStatus
+import io.github.orcunbalcilar.gpost.TestItemStatus
 
 @CompileStatic
 abstract class TestStep {
