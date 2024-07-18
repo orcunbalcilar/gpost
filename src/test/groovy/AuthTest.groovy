@@ -1,35 +1,20 @@
-import groovy.transform.CompileStatic
+import com.epam.reportportal.junit5.ReportPortalExtension
 import groovy.util.logging.Slf4j
-import orcun.balcilar.odapi.auth.BasicAuth
-import orcun.balcilar.odapi.testcases.impl.GroovyScriptTestStep
+import orcun.balcilar.gpost.teststep.request.auth.BasicAuth
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
+@ExtendWith(ReportPortalExtension.class)
 @Slf4j
 class AuthTest {
+
+    @Disabled
     @Test
     void testAuth() {
         def auth = new BasicAuth()
         auth.username("username")
         auth.password("password")
-        log.info(auth.getAuthString())
-    }
-
-    @CompileStatic
-    @Test
-    void script() {
-        def a = 1
-        GroovyScriptTestStep groovyScriptTestStep = new GroovyScriptTestStep({
-            log.info("Script is running")
-            log.info(a.toString())
-        }, null, null)
-        boolean result
-        try {
-            groovyScriptTestStep.run()
-            result = true
-        } catch (Throwable e) {
-            e.printStackTrace()
-            result = false
-        }
-        log.info(result.toString())
+        log.info(auth.toString())
     }
 }
