@@ -1,7 +1,7 @@
 package io.github.orcunbalcilar.gpost.teststep.request
 
 import groovy.transform.CompileStatic
-import orcun.balcilar.gpost.testcase.TestCaseRunContext
+import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
 
 @CompileStatic
 class GetRequest extends Request {

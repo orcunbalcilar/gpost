@@ -1,8 +1,8 @@
 package io.github.orcunbalcilar.gpost
 
 import groovy.transform.CompileStatic
-import orcun.balcilar.gpost.testcase.TestCase
-import orcun.balcilar.gpost.testcase.TestCaseRunner
+import io.github.orcunbalcilar.gpost.testcase.TestCase
+import io.github.orcunbalcilar.gpost.testcase.TestCaseRunner
 import org.junit.jupiter.api.Assumptions
 import org.junit.jupiter.api.Test
 

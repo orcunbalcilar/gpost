@@ -1,8 +1,8 @@
 package io.github.orcunbalcilar.gpost.teststep.request
 
 import groovy.transform.CompileStatic
-import orcun.balcilar.gpost.testcase.TestCaseRunContext
-import orcun.balcilar.gpost.teststep.request.body.RequestBodyBuilder
+import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
+import io.github.orcunbalcilar.gpost.teststep.request.body.RequestBodyBuilder
 
 @CompileStatic
 class PostRequest extends Request implements WithBody {

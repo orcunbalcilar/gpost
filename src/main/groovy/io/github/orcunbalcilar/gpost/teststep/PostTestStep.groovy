@@ -6,8 +6,8 @@ import groovy.util.logging.Slf4j
 import io.github.orcunbalcilar.gpost.TestItemStatus
 import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
 import io.github.orcunbalcilar.gpost.teststep.request.PostRequest
-import orcun.balcilar.gpost.teststep.response.Assertions
-import orcun.balcilar.gpost.teststep.response.JsonAssertions
+import io.github.orcunbalcilar.gpost.teststep.response.Assertions
+import io.github.orcunbalcilar.gpost.teststep.response.JsonAssertions
 import org.apache.hc.client5.http.async.methods.SimpleHttpRequest
 import org.apache.hc.client5.http.async.methods.SimpleHttpResponse
 import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient

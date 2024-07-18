@@ -3,7 +3,7 @@ package io.github.orcunbalcilar.gpost.teststep.request.body
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
 import groovy.xml.MarkupBuilder
-import orcun.balcilar.gpost.testcase.TestCaseRunContext
+import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
 
 @CompileStatic
 class XmlRequestBody extends RequestBody {
@@ -27,5 +27,5 @@ class XmlRequestBody extends RequestBody {
     }
 
     @Override
-    TestCaseRunContext getContext() { return this.@context }
+    TestCaseRunContext getContext() { this.@context }
 }
