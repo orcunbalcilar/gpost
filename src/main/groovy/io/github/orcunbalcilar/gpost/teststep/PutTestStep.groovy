@@ -7,10 +7,10 @@ import org.apache.hc.core5.http.Method
 
 @CompileStatic
 @Slf4j
-class PostTestStep extends RequestBodyTestStep {
+class PutTestStep extends RequestBodyTestStep {
 
-    PostTestStep(TestCaseRunContext context, Closure closure) { super(context, closure) }
+    PutTestStep(TestCaseRunContext context, Closure closure) { super(context, closure) }
 
     @Override
-    Method getMethod() { Method.POST }
+    Method getMethod() { Method.PUT }
 }
