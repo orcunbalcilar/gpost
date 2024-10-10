@@ -2,14 +2,15 @@ package io.github.orcunbalcilar.gpost.teststep.request
 
 import groovy.transform.CompileStatic
 import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
+import io.github.orcunbalcilar.gpost.teststep.request.body.RequestBody
 import io.github.orcunbalcilar.gpost.teststep.request.body.RequestBodyBuilder
 
 @CompileStatic
-class PostRequest extends Request implements WithBody {
+class RequestWithBody extends Request {
 
     private RequestBodyBuilder bodyBuilder
 
-    PostRequest(TestCaseRunContext context) {
+    RequestWithBody(TestCaseRunContext context) {
         super(context)
     }
 
@@ -20,6 +21,7 @@ class PostRequest extends Request implements WithBody {
         closure()
     }
 
-    @Override
+    RequestBody getBody() { bodyBuilder.body }
+
     String getBodyContent() { bodyBuilder.body.build() }
 }

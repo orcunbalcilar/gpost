@@ -42,7 +42,6 @@ class TestCase {
             currentStepIndex++
             currentTestStep.run()
         }
-        println(log.class)
         if (testSteps.every { it.getStatus() == TestItemStatus.PASSED }) {
             log.info("${name} -> PASSED")
             this.status = TestItemStatus.PASSED

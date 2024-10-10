@@ -7,7 +7,7 @@ import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
 @CompileStatic
 class RequestBodyBuilder implements ContextAccess {
 
-    private final TestCaseRunContext context
+    final TestCaseRunContext context
     private RequestBody body
 
     RequestBodyBuilder(TestCaseRunContext context) {
@@ -22,8 +22,13 @@ class RequestBodyBuilder implements ContextAccess {
         this.body = new XmlRequestBody(context, closure)
     }
 
-    @Override
-    TestCaseRunContext getContext() { context }
+    void soap(@DelegatesTo(value = ContextAccess, strategy = Closure.DELEGATE_ONLY) Closure closure) {
+        this.body = new XmlRequestBody(context, {
+            it.invokeMethod("soap:Envelope", new Object[]{["xmlns:soap": "http://schemas.xmlsoap.org/soap/envelope/"], {
+                it.invokeMethod("soap:Body", closure)
+            }})
+        })
+    }
 
     RequestBody getBody() { body }
 }

@@ -5,20 +5,24 @@ import io.github.orcunbalcilar.gpost.testcase.ContextAccess
 import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
 
 @CompileStatic
-class LazyMapClosure implements ContextAccess {
-    @Delegate
-    private final Map<String, String> headers = [:]
+class HeadersClosure implements ContextAccess {
+    final Map<String, String> headers = [:]
 
     final TestCaseRunContext context
 
     private final Closure closure
 
-    LazyMapClosure(TestCaseRunContext context, Closure closure) {
+    HeadersClosure(TestCaseRunContext context, Closure closure) {
         this.context = context
         this.closure = closure
     }
 
-    void run() { closure.call() }
+    def methodMissing(String name, def args) {
+        return headers.put(name, ((Object[]) args)?[0].toString())
+    }
 
-    Map<String, String> result() { headers }
+    Map<String, String> call() {
+        closure.call()
+        headers
+    }
 }
