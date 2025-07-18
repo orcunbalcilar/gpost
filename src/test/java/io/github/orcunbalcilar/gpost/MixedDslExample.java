@@ -1,6 +1,6 @@
 package io.github.orcunbalcilar.gpost.java;
 
-import io.github.orcunbalcilar.gpost.java.JavaTestCaseBuilder;
+import io.github.orcunbalcilar.gpost.java.NewJavaTestCaseBuilder;
 import io.github.orcunbalcilar.gpost.testcase.TestCase;
 import io.github.orcunbalcilar.gpost.testcase.TestCaseBuilder;
 import groovy.lang.Closure;
@@ -18,7 +18,7 @@ public class MixedDslExample {
         System.out.println("=== Testing both Groovy and Java DSL ===");
         
         // Create test case using Java DSL
-        JavaTestCaseBuilder javaBuilder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder javaBuilder = new NewJavaTestCaseBuilder();
         Object javaTestCase = javaBuilder.testCase("Java DSL Test", spec -> {
             spec.get(step -> {
                 step.url("https://httpbin.org/get")
@@ -62,7 +62,7 @@ public class MixedDslExample {
         System.out.println("=== DSL Comparison Demo ===");
         
         // Java DSL approach
-        JavaTestCaseBuilder javaBuilder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder javaBuilder = new NewJavaTestCaseBuilder();
         Object javaTestCase = javaBuilder.testCase("Java Style", spec -> {
             spec.post(step -> {
                 step.url("https://api.example.com/data")

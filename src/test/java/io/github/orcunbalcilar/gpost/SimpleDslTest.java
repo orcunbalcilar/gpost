@@ -1,6 +1,6 @@
 package io.github.orcunbalcilar.gpost.java;
 
-import io.github.orcunbalcilar.gpost.java.JavaTestCaseBuilder;
+import io.github.orcunbalcilar.gpost.java.NewJavaTestCaseBuilder;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -11,7 +11,7 @@ public class SimpleDslTest {
     @Test
     public void testBasicJavaBuilderCreation() {
         // Test that we can create the builder without errors
-        JavaTestCaseBuilder builder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder builder = new NewJavaTestCaseBuilder();
         assert builder != null;
         System.out.println("✓ Java DSL builder created successfully");
     }
@@ -19,7 +19,7 @@ public class SimpleDslTest {
     @Test
     public void testJavaBuilderStaticImport() {
         // Test static import style usage  
-        JavaTestCaseBuilder builder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder builder = new NewJavaTestCaseBuilder();
         
         // This would be the typical usage pattern
         System.out.println("✓ Java DSL can be used for creating test cases");

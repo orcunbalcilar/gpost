@@ -1,6 +1,6 @@
 package io.github.orcunbalcilar.gpost.java;
 
-import io.github.orcunbalcilar.gpost.java.JavaTestCaseBuilder;
+import io.github.orcunbalcilar.gpost.java.NewJavaTestCaseBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
 
@@ -12,7 +12,7 @@ public class JavaDslCompleteExample {
     @Test
     @Disabled("Integration test - requires network access")
     public void completeJavaApiExample() {
-        JavaTestCaseBuilder builder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder builder = new NewJavaTestCaseBuilder();
         
         // Example 1: Simple GET request
         System.out.println("=== Example 1: GET Request ===");
@@ -128,7 +128,7 @@ public class JavaDslCompleteExample {
         System.out.println("=== Java vs Groovy DSL Comparison ===");
         
         // Java DSL style
-        JavaTestCaseBuilder javaBuilder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder javaBuilder = new NewJavaTestCaseBuilder();
         Object javaTest = javaBuilder.testCase("Java Style", spec -> {
             spec.get(step -> {
                 step.url("https://api.example.com/data")

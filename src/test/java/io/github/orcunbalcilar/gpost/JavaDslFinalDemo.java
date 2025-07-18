@@ -1,6 +1,6 @@
 package io.github.orcunbalcilar.gpost.java;
 
-import io.github.orcunbalcilar.gpost.java.JavaTestCaseBuilder;
+import io.github.orcunbalcilar.gpost.java.NewJavaTestCaseBuilder;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -13,14 +13,14 @@ public class JavaDslFinalDemo {
         System.out.println("=== Java DSL for gpost - Final Demo ===");
         
         // Create the Java DSL builder
-        JavaTestCaseBuilder builder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder builder = new NewJavaTestCaseBuilder();
         
         // Demonstrate that we can create the builder and wrapper objects
         System.out.println("✅ Java DSL Builder created successfully");
         
         // Show the API structure
         System.out.println("\nJava DSL API Structure:");
-        System.out.println("  📦 JavaTestCaseBuilder - Main entry point");
+        System.out.println("  📦 NewJavaTestCaseBuilder - Main entry point");
         System.out.println("  📦 TestCaseSpecWrapper - Test case configuration");
         System.out.println("  📦 GetTestStepWrapper - GET request configuration");
         System.out.println("  📦 PostTestStepWrapper - POST request configuration");  

@@ -1,0 +1,58 @@
+package io.github.orcunbalcilar.gpost.core.impl;
+
+import io.github.orcunbalcilar.gpost.core.PutTestStep;
+import io.github.orcunbalcilar.gpost.core.HttpAssertions;
+import io.github.orcunbalcilar.gpost.core.HttpRequest;
+import io.github.orcunbalcilar.gpost.core.HttpRequestWithBody;
+import java.util.function.Consumer;
+
+/**
+ * Java implementation of PutTestStep.
+ */
+public class JavaPutTestStep extends JavaHttpTestStep implements PutTestStep {
+    
+    public JavaPutTestStep(JavaTestCaseSpec.TestCaseRunContext context) {
+        super(context);
+    }
+    
+    @Override
+    protected JavaHttpRequest createHttpRequest() {
+        return new JavaHttpRequestWithBody();
+    }
+    
+    @Override
+    public String getMethod() {
+        return "PUT";
+    }
+    
+    @Override
+    public PutTestStep url(String url) {
+        super.url(url);
+        return this;
+    }
+    
+    @Override
+    public PutTestStep name(String name) {
+        super.name(name);
+        return this;
+    }
+    
+    @Override
+    public PutTestStep requestWithBody(Consumer<HttpRequestWithBody> config) {
+        config.accept((JavaHttpRequestWithBody) request);
+        return this;
+    }
+    
+    // Default implementation for request method
+    @Override
+    public PutTestStep request(Consumer<HttpRequest> config) {
+        config.accept(request);
+        return this;
+    }
+    
+    @Override
+    public PutTestStep assertions(Consumer<HttpAssertions> config) {
+        super.assertions(config);
+        return this;
+    }
+}

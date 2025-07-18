@@ -1,6 +1,6 @@
 package io.github.orcunbalcilar.gpost.java;
 
-import io.github.orcunbalcilar.gpost.java.JavaTestCaseBuilder;
+import io.github.orcunbalcilar.gpost.java.NewJavaTestCaseBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
 
@@ -15,7 +15,7 @@ public class JavaDslTest {
     @Test
     @Disabled("Integration test - requires network access")
     public void testJavaGetRequest() {
-        JavaTestCaseBuilder builder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder builder = new NewJavaTestCaseBuilder();
         
         // Test simple GET request
         Object testCase = builder.get(step -> {
@@ -41,7 +41,7 @@ public class JavaDslTest {
     @Test
     @Disabled("Integration test - requires network access")
     public void testJavaPostRequest() {
-        JavaTestCaseBuilder builder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder builder = new NewJavaTestCaseBuilder();
         
         // Test POST request with JSON body
         Object testCase = builder.testCase("Java POST Test", spec -> {
@@ -71,7 +71,7 @@ public class JavaDslTest {
     @Test
     @Disabled("Integration test - requires network access")
     public void testJavaSoapRequest() {
-        JavaTestCaseBuilder builder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder builder = new NewJavaTestCaseBuilder();
         
         // Test SOAP request similar to the Groovy example
         Object testCase = builder.testCase("Java SOAP Test", spec -> {
@@ -107,7 +107,7 @@ public class JavaDslTest {
     @Test
     public void testJavaBuilderCreation() {
         // Test that we can create the builder without errors
-        JavaTestCaseBuilder builder = new JavaTestCaseBuilder();
+        NewJavaTestCaseBuilder builder = new NewJavaTestCaseBuilder();
         assert builder != null;
         System.out.println("Java DSL builder created successfully");
     }
