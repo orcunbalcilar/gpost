@@ -6,19 +6,19 @@ import java.util.function.Consumer;
 /**
  * Java implementation of TestCaseSpec.
  */
-public class JavaTestCaseSpec implements TestCaseSpec {
+public class TestCaseSpecImpl implements TestCaseSpec {
     
     private final TestCase testCase;
     private final TestCaseRunContext context;
     
-    public JavaTestCaseSpec(TestCase testCase) {
+    public TestCaseSpecImpl(TestCase testCase) {
         this.testCase = testCase;
         this.context = new TestCaseRunContext();
     }
     
     @Override
     public TestCaseSpec get(Consumer<GetTestStep> config) {
-        JavaGetTestStep getTestStep = new JavaGetTestStep(context);
+        GetTestStepImpl getTestStep = new GetTestStepImpl(context);
         config.accept(getTestStep);
         testCase.addTestStep(getTestStep);
         return this;
@@ -26,7 +26,7 @@ public class JavaTestCaseSpec implements TestCaseSpec {
     
     @Override
     public TestCaseSpec post(Consumer<PostTestStep> config) {
-        JavaPostTestStep postTestStep = new JavaPostTestStep(context);
+        PostTestStepImpl postTestStep = new PostTestStepImpl(context);
         config.accept(postTestStep);
         testCase.addTestStep(postTestStep);
         return this;
@@ -34,7 +34,7 @@ public class JavaTestCaseSpec implements TestCaseSpec {
     
     @Override
     public TestCaseSpec put(Consumer<PutTestStep> config) {
-        JavaPutTestStep putTestStep = new JavaPutTestStep(context);
+        PutTestStepImpl putTestStep = new PutTestStepImpl(context);
         config.accept(putTestStep);
         testCase.addTestStep(putTestStep);
         return this;
@@ -42,7 +42,7 @@ public class JavaTestCaseSpec implements TestCaseSpec {
     
     @Override
     public TestCaseSpec script(String name, Runnable script) {
-        JavaScriptTestStep scriptTestStep = new JavaScriptTestStep(name, script);
+        ScriptTestStepImpl scriptTestStep = new ScriptTestStepImpl(name, script);
         testCase.addTestStep(scriptTestStep);
         return this;
     }

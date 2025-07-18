@@ -6,17 +6,17 @@ import io.github.orcunbalcilar.gpost.core.TestStep;
 /**
  * Base Java implementation of TestStep.
  */
-public abstract class JavaTestStep implements TestStep {
+public abstract class TestStepImpl implements TestStep {
     
     private String name;
     private boolean disabled = false;
     private TestItemStatus status = TestItemStatus.UNKNOWN;
     
-    public JavaTestStep() {
+    public TestStepImpl() {
         // Default constructor
     }
     
-    public JavaTestStep(String name) {
+    public TestStepImpl(String name) {
         this.name = name;
     }
     

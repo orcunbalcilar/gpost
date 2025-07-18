@@ -2,7 +2,7 @@ package io.github.orcunbalcilar.gpost.java;
 
 import io.github.orcunbalcilar.gpost.core.TestCase;
 import io.github.orcunbalcilar.gpost.core.TestCaseBuilder;
-import io.github.orcunbalcilar.gpost.core.impl.JavaTestCaseBuilder;
+import io.github.orcunbalcilar.gpost.core.impl.TestCaseBuilderImpl;
 import io.github.orcunbalcilar.gpost.test.BaseWireMockTest;
 import org.junit.jupiter.api.Test;
 import java.util.function.Consumer;
@@ -15,7 +15,7 @@ public class SimpleJavaDslTest extends BaseWireMockTest {
     @Test
     public void testReflectionFreeJavaDsl() {
         // Test 1: Pure Java DSL without reflection
-        TestCaseBuilder builder = new JavaTestCaseBuilder();
+        TestCaseBuilder builder = new TestCaseBuilderImpl();
         
         TestCase testCase = builder.testCase("Simple Test", spec -> {
             spec.script("setup", () -> {

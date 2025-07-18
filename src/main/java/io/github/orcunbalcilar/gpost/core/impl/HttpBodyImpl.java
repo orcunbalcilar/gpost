@@ -7,11 +7,11 @@ import java.util.function.Consumer;
 /**
  * Java implementation of HttpBody.
  */
-public class JavaHttpBody implements HttpBody {
+public class HttpBodyImpl implements HttpBody {
     
     private String content;
     private String contentType;
-    private final JavaSoapBody soapBody = new JavaSoapBody();
+    private final SoapBodyImpl soapBody = new SoapBodyImpl();
     
     @Override
     public HttpBody json(String json) {
@@ -59,7 +59,7 @@ public class JavaHttpBody implements HttpBody {
     /**
      * Get the SOAP body.
      */
-    public JavaSoapBody getSoapBody() {
+    public SoapBodyImpl getSoapBody() {
         return soapBody;
     }
 }

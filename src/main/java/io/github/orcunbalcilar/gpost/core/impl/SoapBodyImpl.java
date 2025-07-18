@@ -5,7 +5,7 @@ import io.github.orcunbalcilar.gpost.core.SoapBody;
 /**
  * Java implementation of SoapBody.
  */
-public class JavaSoapBody implements SoapBody {
+public class SoapBodyImpl implements SoapBody {
     
     private String envelope;
     private String namespace;

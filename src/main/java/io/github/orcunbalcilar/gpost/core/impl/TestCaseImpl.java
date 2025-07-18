@@ -10,20 +10,20 @@ import java.util.logging.Logger;
 /**
  * Java implementation of TestCase.
  */
-public class JavaTestCase implements TestCase {
+public class TestCaseImpl implements TestCase {
     
-    private static final Logger logger = Logger.getLogger(JavaTestCase.class.getName());
+    private static final Logger logger = Logger.getLogger(TestCaseImpl.class.getName());
     
     private String name;
     private final List<TestStep> testSteps = new ArrayList<>();
     private int currentStepIndex = 0;
     private TestItemStatus status = TestItemStatus.UNKNOWN;
     
-    public JavaTestCase() {
+    public TestCaseImpl() {
         // Default constructor
     }
     
-    public JavaTestCase(String name) {
+    public TestCaseImpl(String name) {
         this.name = name;
     }
     

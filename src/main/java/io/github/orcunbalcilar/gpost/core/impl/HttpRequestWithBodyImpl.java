@@ -7,9 +7,9 @@ import java.util.function.Consumer;
 /**
  * Java implementation of HttpRequestWithBody.
  */
-public class JavaHttpRequestWithBody extends JavaHttpRequest implements HttpRequestWithBody {
+public class HttpRequestWithBodyImpl extends HttpRequestImpl implements HttpRequestWithBody {
     
-    private final JavaHttpBody httpBody = new JavaHttpBody();
+    private final HttpBodyImpl httpBody = new HttpBodyImpl();
     
     @Override
     public HttpRequestWithBody body(Consumer<HttpBody> config) {
@@ -38,7 +38,7 @@ public class JavaHttpRequestWithBody extends JavaHttpRequest implements HttpRequ
     /**
      * Get the configured body.
      */
-    public JavaHttpBody getBody() {
+    public HttpBodyImpl getBody() {
         return httpBody;
     }
 }

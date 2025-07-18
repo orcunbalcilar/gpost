@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Java implementation of JsonAssertions.
  */
-public class JavaJsonAssertions implements JsonAssertions {
+public class JsonAssertionsImpl implements JsonAssertions {
     
     private final List<JsonAssertionRule> assertions = new ArrayList<>();
     

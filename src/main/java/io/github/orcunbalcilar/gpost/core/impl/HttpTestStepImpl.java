@@ -9,20 +9,20 @@ import java.util.Map;
 /**
  * Base Java implementation of HttpTestStep.
  */
-public abstract class JavaHttpTestStep extends JavaTestStep implements HttpTestStep {
+public abstract class HttpTestStepImpl extends TestStepImpl implements HttpTestStep {
     
-    protected final JavaTestCaseSpec.TestCaseRunContext context;
+    protected final TestCaseSpecImpl.TestCaseRunContext context;
     protected String url;
-    protected JavaHttpRequest request;
-    protected JavaHttpAssertions assertions;
+    protected HttpRequestImpl request;
+    protected HttpAssertionsImpl assertions;
     
-    public JavaHttpTestStep(JavaTestCaseSpec.TestCaseRunContext context) {
+    public HttpTestStepImpl(TestCaseSpecImpl.TestCaseRunContext context) {
         this.context = context;
         this.request = createHttpRequest();
-        this.assertions = new JavaHttpAssertions();
+        this.assertions = new HttpAssertionsImpl();
     }
     
-    protected abstract JavaHttpRequest createHttpRequest();
+    protected abstract HttpRequestImpl createHttpRequest();
     
     @Override
     public HttpTestStep url(String url) {
@@ -71,14 +71,14 @@ public abstract class JavaHttpTestStep extends JavaTestStep implements HttpTestS
     /**
      * Get the configured request object.
      */
-    public JavaHttpRequest getRequest() {
+    public HttpRequestImpl getRequest() {
         return request;
     }
     
     /**
      * Get the configured assertions object.
      */
-    public JavaHttpAssertions getAssertions() {
+    public HttpAssertionsImpl getAssertions() {
         return assertions;
     }
 }

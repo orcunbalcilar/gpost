@@ -1,7 +1,7 @@
 package io.github.orcunbalcilar.gpost.java;
 
 import io.github.orcunbalcilar.gpost.core.*;
-import io.github.orcunbalcilar.gpost.core.impl.JavaTestCaseBuilder;
+import io.github.orcunbalcilar.gpost.core.impl.TestCaseBuilderImpl;
 import java.util.function.Consumer;
 
 /**
@@ -13,7 +13,7 @@ public class NewJavaTestCaseBuilder {
     private final TestCaseBuilder coreBuilder;
     
     public NewJavaTestCaseBuilder() {
-        this.coreBuilder = new JavaTestCaseBuilder();
+        this.coreBuilder = new TestCaseBuilderImpl();
     }
     
     /**

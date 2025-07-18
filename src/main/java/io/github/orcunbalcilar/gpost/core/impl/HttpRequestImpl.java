@@ -9,10 +9,10 @@ import java.util.function.Consumer;
 /**
  * Java implementation of HttpRequest.
  */
-public class JavaHttpRequest implements HttpRequest {
+public class HttpRequestImpl implements HttpRequest {
     
     protected final Map<String, String> headers = new HashMap<>();
-    protected final JavaHttpHeaders httpHeaders = new JavaHttpHeaders(headers);
+    protected final HttpHeadersImpl httpHeaders = new HttpHeadersImpl(headers);
     
     @Override
     public HttpRequest headers(Consumer<HttpHeaders> config) {
@@ -50,7 +50,7 @@ public class JavaHttpRequest implements HttpRequest {
     /**
      * Get the HTTP headers object.
      */
-    public JavaHttpHeaders getHttpHeaders() {
+    public HttpHeadersImpl getHttpHeaders() {
         return httpHeaders;
     }
 }

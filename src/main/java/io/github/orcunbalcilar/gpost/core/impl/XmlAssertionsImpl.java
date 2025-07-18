@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Java implementation of XmlAssertions.
  */
-public class JavaXmlAssertions implements XmlAssertions {
+public class XmlAssertionsImpl implements XmlAssertions {
     
     private final List<XmlAssertionRule> assertions = new ArrayList<>();
     

@@ -8,15 +8,15 @@ import java.util.function.Consumer;
 /**
  * Java implementation of GetTestStep.
  */
-public class JavaGetTestStep extends JavaHttpTestStep implements GetTestStep {
+public class GetTestStepImpl extends HttpTestStepImpl implements GetTestStep {
     
-    public JavaGetTestStep(JavaTestCaseSpec.TestCaseRunContext context) {
+    public GetTestStepImpl(TestCaseSpecImpl.TestCaseRunContext context) {
         super(context);
     }
     
     @Override
-    protected JavaHttpRequest createHttpRequest() {
-        return new JavaHttpRequest();
+    protected HttpRequestImpl createHttpRequest() {
+        return new HttpRequestImpl();
     }
     
     @Override

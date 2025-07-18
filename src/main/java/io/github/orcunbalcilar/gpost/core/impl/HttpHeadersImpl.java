@@ -6,11 +6,11 @@ import java.util.Map;
 /**
  * Java implementation of HttpHeaders.
  */
-public class JavaHttpHeaders implements HttpHeaders {
+public class HttpHeadersImpl implements HttpHeaders {
     
     private final Map<String, String> headers;
     
-    public JavaHttpHeaders(Map<String, String> headers) {
+    public HttpHeadersImpl(Map<String, String> headers) {
         this.headers = headers;
     }
     

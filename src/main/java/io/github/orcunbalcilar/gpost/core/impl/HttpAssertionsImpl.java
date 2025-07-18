@@ -10,11 +10,11 @@ import java.util.function.Consumer;
 /**
  * Java implementation of HttpAssertions.
  */
-public class JavaHttpAssertions implements HttpAssertions {
+public class HttpAssertionsImpl implements HttpAssertions {
     
     private final List<AssertionRule> assertions = new ArrayList<>();
-    private final JavaJsonAssertions jsonAssertions = new JavaJsonAssertions();
-    private final JavaXmlAssertions xmlAssertions = new JavaXmlAssertions();
+    private final JsonAssertionsImpl jsonAssertions = new JsonAssertionsImpl();
+    private final XmlAssertionsImpl xmlAssertions = new XmlAssertionsImpl();
     
     @Override
     public HttpAssertions statusCode(int expectedStatusCode) {
@@ -62,14 +62,14 @@ public class JavaHttpAssertions implements HttpAssertions {
     /**
      * Get the JSON assertions.
      */
-    public JavaJsonAssertions getJsonAssertions() {
+    public JsonAssertionsImpl getJsonAssertions() {
         return jsonAssertions;
     }
     
     /**
      * Get the XML assertions.
      */
-    public JavaXmlAssertions getXmlAssertions() {
+    public XmlAssertionsImpl getXmlAssertions() {
         return xmlAssertions;
     }
     

@@ -5,11 +5,11 @@ import io.github.orcunbalcilar.gpost.TestItemStatus;
 /**
  * Java implementation of a script test step.
  */
-public class JavaScriptTestStep extends JavaTestStep {
+public class ScriptTestStepImpl extends TestStepImpl {
     
     private final Runnable script;
     
-    public JavaScriptTestStep(String name, Runnable script) {
+    public ScriptTestStepImpl(String name, Runnable script) {
         super(name);
         this.script = script;
     }

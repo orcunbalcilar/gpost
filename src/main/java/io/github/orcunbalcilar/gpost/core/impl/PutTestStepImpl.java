@@ -1,57 +1,57 @@
 package io.github.orcunbalcilar.gpost.core.impl;
 
-import io.github.orcunbalcilar.gpost.core.PostTestStep;
+import io.github.orcunbalcilar.gpost.core.PutTestStep;
 import io.github.orcunbalcilar.gpost.core.HttpAssertions;
 import io.github.orcunbalcilar.gpost.core.HttpRequest;
 import io.github.orcunbalcilar.gpost.core.HttpRequestWithBody;
 import java.util.function.Consumer;
 
 /**
- * Java implementation of PostTestStep.
+ * Java implementation of PutTestStep.
  */
-public class JavaPostTestStep extends JavaHttpTestStep implements PostTestStep {
+public class PutTestStepImpl extends HttpTestStepImpl implements PutTestStep {
     
-    public JavaPostTestStep(JavaTestCaseSpec.TestCaseRunContext context) {
+    public PutTestStepImpl(TestCaseSpecImpl.TestCaseRunContext context) {
         super(context);
     }
     
     @Override
-    protected JavaHttpRequest createHttpRequest() {
-        return new JavaHttpRequestWithBody();
+    protected HttpRequestImpl createHttpRequest() {
+        return new HttpRequestWithBodyImpl();
     }
     
     @Override
     public String getMethod() {
-        return "POST";
+        return "PUT";
     }
     
     @Override
-    public PostTestStep url(String url) {
+    public PutTestStep url(String url) {
         super.url(url);
         return this;
     }
     
     @Override
-    public PostTestStep name(String name) {
+    public PutTestStep name(String name) {
         super.name(name);
         return this;
     }
     
     @Override
-    public PostTestStep requestWithBody(Consumer<HttpRequestWithBody> config) {
-        config.accept((JavaHttpRequestWithBody) request);
+    public PutTestStep requestWithBody(Consumer<HttpRequestWithBody> config) {
+        config.accept((HttpRequestWithBodyImpl) request);
         return this;
     }
     
     // Default implementation for request method
     @Override
-    public PostTestStep request(Consumer<HttpRequest> config) {
+    public PutTestStep request(Consumer<HttpRequest> config) {
         config.accept(request);
         return this;
     }
     
     @Override
-    public PostTestStep assertions(Consumer<HttpAssertions> config) {
+    public PutTestStep assertions(Consumer<HttpAssertions> config) {
         super.assertions(config);
         return this;
     }
