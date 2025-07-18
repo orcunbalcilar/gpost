@@ -18,7 +18,7 @@ public class TestCaseBuilderImpl implements TestCaseBuilder {
     
     @Override
     public TestCase get(Consumer<GetTestStep> config) {
-        TestCaseImpl testCase = new TestCaseImpl();
+        TestCaseImpl testCase = new TestCaseImpl("GET Test Case");
         TestCaseSpecImpl spec = new TestCaseSpecImpl(testCase);
         spec.get(config);
         return testCase;
@@ -26,7 +26,7 @@ public class TestCaseBuilderImpl implements TestCaseBuilder {
     
     @Override
     public TestCase post(Consumer<PostTestStep> config) {
-        TestCaseImpl testCase = new TestCaseImpl();
+        TestCaseImpl testCase = new TestCaseImpl("POST Test Case");
         TestCaseSpecImpl spec = new TestCaseSpecImpl(testCase);
         spec.post(config);
         return testCase;
@@ -34,7 +34,7 @@ public class TestCaseBuilderImpl implements TestCaseBuilder {
     
     @Override
     public TestCase put(Consumer<PutTestStep> config) {
-        TestCaseImpl testCase = new TestCaseImpl();
+        TestCaseImpl testCase = new TestCaseImpl("PUT Test Case");
         TestCaseSpecImpl spec = new TestCaseSpecImpl(testCase);
         spec.put(config);
         return testCase;
