@@ -6,7 +6,7 @@ import java.util.function.Consumer;
  * Core interface for test case specification.
  * Both Groovy and Java DSL implementations should implement this interface.
  */
-public interface TestCaseSpec {
+public interface TestCaseSpec extends HasAuth, ContextAccess {
     
     /**
      * Add a GET request test step.

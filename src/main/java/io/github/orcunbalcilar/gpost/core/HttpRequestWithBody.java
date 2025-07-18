@@ -38,4 +38,19 @@ public interface HttpRequestWithBody extends HttpRequest {
      * @return This request for method chaining
      */
     HttpRequestWithBody textBody(String text);
+    
+    /**
+     * Configure the request body using a request body builder.
+     * 
+     * @param config The request body builder configuration
+     * @return This request for method chaining
+     */
+    HttpRequestWithBody requestBody(Consumer<RequestBodyBuilder> config);
+    
+    /**
+     * Get the request body.
+     * 
+     * @return The request body or null if not set
+     */
+    RequestBody getRequestBody();
 }

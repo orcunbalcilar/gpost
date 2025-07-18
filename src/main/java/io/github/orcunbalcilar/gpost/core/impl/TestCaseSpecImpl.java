@@ -10,10 +10,11 @@ public class TestCaseSpecImpl implements TestCaseSpec {
     
     private final TestCase testCase;
     private final TestCaseRunContext context;
+    private Auth auth;
     
     public TestCaseSpecImpl(TestCase testCase) {
         this.testCase = testCase;
-        this.context = new TestCaseRunContext();
+        this.context = new TestCaseRunContextImpl();
     }
     
     @Override
@@ -48,15 +49,25 @@ public class TestCaseSpecImpl implements TestCaseSpec {
     }
     
     @Override
-    public TestCase getTestCase() {
-        return testCase;
+    public HasAuth basicAuth(Consumer<BasicAuth> config) {
+        BasicAuthImpl basicAuth = new BasicAuthImpl();
+        config.accept(basicAuth);
+        this.auth = basicAuth;
+        return this;
     }
     
-    /**
-     * Simple context holder for test case execution.
-     */
-    public static class TestCaseRunContext {
-        // This is a simple placeholder for the context
-        // In a real implementation, this would hold execution state
+    @Override
+    public Auth getAuth() {
+        return auth;
+    }
+    
+    @Override
+    public TestCaseRunContext getContext() {
+        return context;
+    }
+    
+    @Override
+    public TestCase getTestCase() {
+        return testCase;
     }
 }

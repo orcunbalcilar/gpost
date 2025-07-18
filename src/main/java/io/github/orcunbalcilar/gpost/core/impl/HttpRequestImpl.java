@@ -1,7 +1,6 @@
 package io.github.orcunbalcilar.gpost.core.impl;
 
-import io.github.orcunbalcilar.gpost.core.HttpHeaders;
-import io.github.orcunbalcilar.gpost.core.HttpRequest;
+import io.github.orcunbalcilar.gpost.core.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -13,6 +12,12 @@ public class HttpRequestImpl implements HttpRequest {
     
     protected final Map<String, String> headers = new HashMap<>();
     protected final HttpHeadersImpl httpHeaders = new HttpHeadersImpl(headers);
+    protected final TestCaseRunContext context;
+    protected Auth auth;
+    
+    public HttpRequestImpl(TestCaseRunContext context) {
+        this.context = context;
+    }
     
     @Override
     public HttpRequest headers(Consumer<HttpHeaders> config) {
@@ -38,6 +43,24 @@ public class HttpRequestImpl implements HttpRequest {
     public HttpRequest bearerAuth(String token) {
         headers.put("Authorization", "Bearer " + token);
         return this;
+    }
+    
+    @Override
+    public HasAuth basicAuth(Consumer<BasicAuth> config) {
+        BasicAuthImpl basicAuth = new BasicAuthImpl();
+        config.accept(basicAuth);
+        this.auth = basicAuth;
+        return this;
+    }
+    
+    @Override
+    public Auth getAuth() {
+        return auth;
+    }
+    
+    @Override
+    public TestCaseRunContext getContext() {
+        return context;
     }
     
     /**

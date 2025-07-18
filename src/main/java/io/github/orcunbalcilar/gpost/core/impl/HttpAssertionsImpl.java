@@ -1,8 +1,6 @@
 package io.github.orcunbalcilar.gpost.core.impl;
 
-import io.github.orcunbalcilar.gpost.core.HttpAssertions;
-import io.github.orcunbalcilar.gpost.core.JsonAssertions;
-import io.github.orcunbalcilar.gpost.core.XmlAssertions;
+import io.github.orcunbalcilar.gpost.core.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -15,6 +13,11 @@ public class HttpAssertionsImpl implements HttpAssertions {
     private final List<AssertionRule> assertions = new ArrayList<>();
     private final JsonAssertionsImpl jsonAssertions = new JsonAssertionsImpl();
     private final XmlAssertionsImpl xmlAssertions = new XmlAssertionsImpl();
+    private final TestCaseRunContext context;
+    
+    public HttpAssertionsImpl(TestCaseRunContext context) {
+        this.context = context;
+    }
     
     @Override
     public HttpAssertions statusCode(int expectedStatusCode) {
@@ -31,6 +34,15 @@ public class HttpAssertionsImpl implements HttpAssertions {
     @Override
     public HttpAssertions bodyEquals(String text) {
         assertions.add(new AssertionRule("bodyEquals", text));
+        return this;
+    }
+    
+    @Override
+    public HttpAssertions body(Consumer<ResponseBodyAssertions> config) {
+        // For now, we'll create a placeholder response body
+        // In a real implementation, this would use the actual response
+        ResponseBodyAssertionsImpl bodyAssertions = new ResponseBodyAssertionsImpl(null, context);
+        config.accept(bodyAssertions);
         return this;
     }
     

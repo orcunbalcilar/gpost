@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 /**
  * Core interface for HTTP requests.
  */
-public interface HttpRequest {
+public interface HttpRequest extends HasAuth, ContextAccess {
     
     /**
      * Configure the headers for this request.

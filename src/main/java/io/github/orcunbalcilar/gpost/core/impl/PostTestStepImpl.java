@@ -1,9 +1,6 @@
 package io.github.orcunbalcilar.gpost.core.impl;
 
-import io.github.orcunbalcilar.gpost.core.PostTestStep;
-import io.github.orcunbalcilar.gpost.core.HttpAssertions;
-import io.github.orcunbalcilar.gpost.core.HttpRequest;
-import io.github.orcunbalcilar.gpost.core.HttpRequestWithBody;
+import io.github.orcunbalcilar.gpost.core.*;
 import java.util.function.Consumer;
 
 /**
@@ -11,13 +8,13 @@ import java.util.function.Consumer;
  */
 public class PostTestStepImpl extends HttpTestStepImpl implements PostTestStep {
     
-    public PostTestStepImpl(TestCaseSpecImpl.TestCaseRunContext context) {
+    public PostTestStepImpl(TestCaseRunContext context) {
         super(context);
     }
     
     @Override
     protected HttpRequestImpl createHttpRequest() {
-        return new HttpRequestWithBodyImpl();
+        return new HttpRequestWithBodyImpl(context);
     }
     
     @Override

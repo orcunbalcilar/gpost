@@ -11,15 +11,15 @@ import java.util.Map;
  */
 public abstract class HttpTestStepImpl extends TestStepImpl implements HttpTestStep {
     
-    protected final TestCaseSpecImpl.TestCaseRunContext context;
+    protected final TestCaseRunContext context;
     protected String url;
     protected HttpRequestImpl request;
     protected HttpAssertionsImpl assertions;
     
-    public HttpTestStepImpl(TestCaseSpecImpl.TestCaseRunContext context) {
+    public HttpTestStepImpl(TestCaseRunContext context) {
         this.context = context;
         this.request = createHttpRequest();
-        this.assertions = new HttpAssertionsImpl();
+        this.assertions = new HttpAssertionsImpl(context);
     }
     
     protected abstract HttpRequestImpl createHttpRequest();

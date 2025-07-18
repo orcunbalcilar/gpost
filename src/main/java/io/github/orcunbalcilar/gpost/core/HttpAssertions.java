@@ -32,6 +32,14 @@ public interface HttpAssertions {
     HttpAssertions bodyEquals(String text);
     
     /**
+     * Assert on response body.
+     * 
+     * @param config The response body assertions configuration
+     * @return This assertions for method chaining
+     */
+    HttpAssertions body(Consumer<ResponseBodyAssertions> config);
+    
+    /**
      * Assert on JSON response.
      * 
      * @param config The JSON assertions configuration

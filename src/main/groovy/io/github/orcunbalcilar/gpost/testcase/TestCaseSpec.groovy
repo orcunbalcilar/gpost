@@ -47,4 +47,34 @@ class TestCaseSpec implements HasAuth {
         closure.setResolveStrategy(Closure.DELEGATE_ONLY)
         testCase << groovyScriptTestStep
     }
+
+    // Enhanced context access for improved integration
+    TestCaseRunContext getContext() {
+        return context
+    }
+
+    // Method missing for dynamic property access (Groovy feature)
+    def methodMissing(String name, Object[] args) {
+        if (context.hasProperty(name)) {
+            if (args.length == 0) {
+                return context.getProperty(name)
+            } else if (args.length == 1) {
+                context.setProperty(name, args[0])
+                return this
+            }
+        }
+        throw new MissingMethodException(name, this.class, args)
+    }
+
+    // Property missing for dynamic property access (Groovy feature)
+    def propertyMissing(String name) {
+        if (context.hasProperty(name)) {
+            return context.getProperty(name)
+        }
+        throw new MissingPropertyException(name, this.class)
+    }
+
+    def propertyMissing(String name, value) {
+        context.setProperty(name, value)
+    }
 }
