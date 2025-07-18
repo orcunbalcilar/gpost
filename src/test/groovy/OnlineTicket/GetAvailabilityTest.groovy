@@ -6,18 +6,24 @@ import io.github.orcunbalcilar.gpost.testcase.TestCase
 
 import static io.github.orcunbalcilar.gpost.testcase.TestCaseBuilder.testCase
 
-//@ExtendWith(ReportPortalExtension.class)
+/**
+ * Test using WireMock virtual services instead of external APIs.
+ * This test has been updated to use a mock URL instead of external services.
+ */
 class GetAvailabilityTest extends JUnit5Test {
 
     @Override
     TestCase create() {
+        // Use localhost mock instead of external service
+        def mockUrl = "http://localhost:8090"
+        
         testCase "LinkedIn Search Test", {
             script("setUbiNum") {
                 log.info("Script-1 is running")
                 context.property("ert", 903)
             }
             post {
-                url("https://www.dataaccess.com/webservicesserver/NumberConversion.wso")
+                url("${mockUrl}/webservicesserver/NumberConversion.wso")
                 request {
                     body {
                         soap {

@@ -3,14 +3,17 @@ package io.github.orcunbalcilar.gpost.java;
 import io.github.orcunbalcilar.gpost.core.TestCase;
 import io.github.orcunbalcilar.gpost.core.TestCaseBuilder;
 import io.github.orcunbalcilar.gpost.core.impl.JavaTestCaseBuilder;
+import io.github.orcunbalcilar.gpost.test.BaseWireMockTest;
+import org.junit.jupiter.api.Test;
 import java.util.function.Consumer;
 
 /**
- * Simple test to verify the new reflection-free Java DSL works.
+ * Simple test to verify the new reflection-free Java DSL works using WireMock virtual services.
  */
-public class SimpleJavaDslTest {
+public class SimpleJavaDslTest extends BaseWireMockTest {
     
-    public static void main(String[] args) {
+    @Test
+    public void testReflectionFreeJavaDsl() {
         // Test 1: Pure Java DSL without reflection
         TestCaseBuilder builder = new JavaTestCaseBuilder();
         
@@ -20,7 +23,7 @@ public class SimpleJavaDslTest {
             });
             
             spec.get(step -> {
-                step.url("https://httpbin.org/get")
+                step.url(baseUrl + "/get")
                     .name("Simple GET request")
                     .assertions(assertions -> {
                         assertions.statusCode(200);
@@ -34,7 +37,7 @@ public class SimpleJavaDslTest {
         
         // Test 2: Simple GET request
         TestCase getTest = builder.get(step -> {
-            step.url("https://httpbin.org/get")
+            step.url(baseUrl + "/get")
                 .name("GET Test")
                 .assertions(assertions -> {
                     assertions.statusCode(200)
@@ -55,5 +58,10 @@ public class SimpleJavaDslTest {
         
         System.out.println("✓ Created test case with new builder: " + newTestCase.getName());
         System.out.println("✓ Reflection-free Java DSL is complete!");
+        
+        // Verify assertions
+        assert testCase != null;
+        assert getTest != null;
+        assert newTestCase != null;
     }
 }
