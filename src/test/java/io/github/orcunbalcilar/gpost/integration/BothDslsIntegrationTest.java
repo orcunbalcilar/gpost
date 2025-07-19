@@ -6,6 +6,7 @@ import io.github.orcunbalcilar.gpost.test.BaseWireMockTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static io.github.orcunbalcilar.gpost.test.TestConstants.*;
 
 /**
  * Integration test demonstrating both DSLs share the same underlying core implementation.
@@ -22,7 +23,7 @@ public class BothDslsIntegrationTest extends BaseWireMockTest {
                 System.out.println("Java DSL with simplified architecture");
             });
             spec.get(step -> {
-                step.url("http://localhost:8089/get");
+                step.url(baseUrl + "/get");
                 step.name("Simple GET request");
             });
         });

@@ -5,6 +5,8 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.util.Random;
+
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 /**
@@ -15,15 +17,18 @@ public abstract class BaseWireMockTest {
     
     protected WireMockServer wireMockServer;
     protected String baseUrl;
+    protected int serverPort;
     
     @BeforeEach
     void setUp() {
-        wireMockServer = new WireMockServer(8089);
+        // Use random port to avoid conflicts in parallel test execution
+        serverPort = findAvailablePort();
+        wireMockServer = new WireMockServer(serverPort);
         wireMockServer.start();
-        baseUrl = "http://localhost:8089";
+        baseUrl = "http://localhost:" + serverPort;
         
         // Configure WireMock to use our server
-        WireMock.configureFor("localhost", 8089);
+        WireMock.configureFor("localhost", serverPort);
         
         // Set up common mock endpoints
         setupCommonMocks();
@@ -34,6 +39,16 @@ public abstract class BaseWireMockTest {
         if (wireMockServer != null) {
             wireMockServer.stop();
         }
+    }
+    
+    /**
+     * Find an available port for WireMock server.
+     * @return An available port number
+     */
+    private int findAvailablePort() {
+        // Use a range starting from 8090 to avoid conflicts with default 8089
+        Random random = new Random();
+        return 8090 + random.nextInt(1000); // Random port between 8090-9089
     }
     
     /**
