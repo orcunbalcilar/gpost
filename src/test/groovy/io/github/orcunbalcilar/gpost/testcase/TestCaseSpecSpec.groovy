@@ -37,44 +37,50 @@ class TestCaseSpecSpec extends Specification {
         result == "testValue"
     }
 
-    def "context should support property method syntax"() {
-        when:
-        testCaseSpec.getContext().property("testProp", "testValue")
-        def result = testCaseSpec.getContext().property("testProp")
-
-        then:
-        result == "testValue"
-    }
-
-    def "context should support indexed access"() {
-        when:
-        testCaseSpec.getContext().setAt("indexedProp", "indexedValue")
-        def result = testCaseSpec.getContext().getAt("indexedProp")
-
-        then:
-        result == "indexedValue"
-    }
-
-    def "context should support typed property access via property method"() {
-        when:
-        testCaseSpec.getContext().property("stringProp", "stringValue")
-        testCaseSpec.getContext().property("intProp", 42)
-        testCaseSpec.getContext().property("boolProp", true)
-
-        then:
-        testCaseSpec.getContext().property("stringProp") == "stringValue"
-        testCaseSpec.getContext().property("intProp") == 42
-        testCaseSpec.getContext().property("boolProp") == true
-    }
-
-    def "context should support parameter access through object"() {
+    def "context should support hasProperty check"() {
         given:
-        testCaseSpec.getContext().property("prop1", "value1")
-        testCaseSpec.getContext().property("prop2", "value2")
+        testCaseSpec.getContext().setProperty("existingProperty", "value")
 
         expect:
-        testCaseSpec.getContext().getProperty("prop1") == "value1"
-        testCaseSpec.getContext().getProperty("prop2") == "value2"
+        testCaseSpec.getContext().hasProperty("existingProperty") == true
+        testCaseSpec.getContext().hasProperty("nonExistentProperty") == false
+    }
+
+    def "context should support property removal"() {
+        given:
+        testCaseSpec.getContext().setProperty("tempProperty", "tempValue")
+        
+        when:
+        def removedValue = testCaseSpec.getContext().removeProperty("tempProperty")
+
+        then:
+        removedValue == "tempValue"
+        testCaseSpec.getContext().hasProperty("tempProperty") == false
+    }
+
+    def "context should support typed property access"() {
+        when:
+        testCaseSpec.getContext().setProperty("stringProp", "stringValue")
+        testCaseSpec.getContext().setProperty("intProp", 42)
+        testCaseSpec.getContext().setProperty("boolProp", true)
+
+        then:
+        testCaseSpec.getContext().getProperty("stringProp", String.class) == "stringValue"
+        testCaseSpec.getContext().getProperty("intProp", Integer.class) == 42
+        testCaseSpec.getContext().getProperty("boolProp", Boolean.class) == true
+    }
+
+    def "context should support property clearing"() {
+        given:
+        testCaseSpec.getContext().setProperty("prop1", "value1")
+        testCaseSpec.getContext().setProperty("prop2", "value2")
+
+        when:
+        testCaseSpec.getContext().clearProperties()
+
+        then:
+        testCaseSpec.getContext().hasProperty("prop1") == false
+        testCaseSpec.getContext().hasProperty("prop2") == false
     }
 
     def "enhanced context access should work through getContext method"() {
