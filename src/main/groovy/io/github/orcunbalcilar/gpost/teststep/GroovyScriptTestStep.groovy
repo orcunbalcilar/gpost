@@ -3,7 +3,8 @@ package io.github.orcunbalcilar.gpost.teststep
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import io.github.orcunbalcilar.gpost.TestItemStatus
-import io.github.orcunbalcilar.gpost.testcase.ContextAccess
+import io.github.orcunbalcilar.gpost.core.ContextAccess
+import io.github.orcunbalcilar.gpost.core.TestCaseRunContext as CoreTestCaseRunContext
 import io.github.orcunbalcilar.gpost.testcase.TestCase
 import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
 import org.slf4j.Logger
@@ -36,5 +37,10 @@ class GroovyScriptTestStep extends TestStep implements ContextAccess {
         } finally {
             log.info("$name -> ${status.toString()}")
         }
+    }
+
+    @Override
+    CoreTestCaseRunContext getContext() {
+        return context
     }
 }

@@ -1,7 +1,8 @@
 package io.github.orcunbalcilar.gpost.teststep.request
 
 import groovy.transform.CompileStatic
-import io.github.orcunbalcilar.gpost.testcase.ContextAccess
+import io.github.orcunbalcilar.gpost.core.ContextAccess
+import io.github.orcunbalcilar.gpost.core.TestCaseRunContext as CoreTestCaseRunContext
 import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
 
 @CompileStatic
@@ -37,5 +38,10 @@ class HeadersClosure implements ContextAccess {
     
     Map<String, String> result() {
         return headers
+    }
+
+    @Override
+    CoreTestCaseRunContext getContext() {
+        return context
     }
 }

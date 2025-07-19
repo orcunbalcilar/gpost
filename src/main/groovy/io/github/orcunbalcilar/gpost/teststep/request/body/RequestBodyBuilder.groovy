@@ -1,7 +1,8 @@
 package io.github.orcunbalcilar.gpost.teststep.request.body
 
 import groovy.transform.CompileStatic
-import io.github.orcunbalcilar.gpost.testcase.ContextAccess
+import io.github.orcunbalcilar.gpost.core.ContextAccess
+import io.github.orcunbalcilar.gpost.core.TestCaseRunContext as CoreTestCaseRunContext
 import io.github.orcunbalcilar.gpost.testcase.TestCaseRunContext
 
 @CompileStatic
@@ -31,4 +32,9 @@ class RequestBodyBuilder implements ContextAccess {
     }
 
     RequestBody getBody() { body }
+
+    @Override
+    CoreTestCaseRunContext getContext() {
+        return context
+    }
 }
