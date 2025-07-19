@@ -33,6 +33,7 @@ abstract class HttpTestStep extends TestStep implements HasAuth {
     final TestCaseRunContext context
 
     private final Closure closure
+    private boolean initialized = false
 
     String name
 
@@ -45,6 +46,14 @@ abstract class HttpTestStep extends TestStep implements HasAuth {
     int statusCode
 
     SimpleHttpResponse response
+    
+    Request getRequest() {
+        return request
+    }
+    
+    void markInitialized() {
+        initialized = true
+    }
 
     HttpTestStep(TestCaseRunContext context, Closure closure) {
         this.context = context
@@ -66,7 +75,10 @@ abstract class HttpTestStep extends TestStep implements HasAuth {
 
     @Override
     void run() {
-        closure.call(context)
+        if (!initialized) {
+            closure.call(context)
+            initialized = true
+        }
         CloseableHttpAsyncClient closeableHttpAsyncClient = getCloseableHttpAsyncClient()
         try {
             String testStepName = getName()

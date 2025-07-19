@@ -2,7 +2,6 @@ package io.github.orcunbalcilar.gpost.integration;
 
 import io.github.orcunbalcilar.gpost.core.TestCase;
 import io.github.orcunbalcilar.gpost.core.TestCaseBuilder;
-import io.github.orcunbalcilar.gpost.core.impl.TestCaseBuilderImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +13,7 @@ class DslIntegrationTest {
     
     @Test
     void testJavaDslBasicUsage() {
-        TestCaseBuilder builder = new TestCaseBuilderImpl();
+        TestCaseBuilder builder = new TestCaseBuilder();
         
         TestCase testCase = builder.testCase("Java DSL Test", spec -> {
             spec.script("setup", () -> {
@@ -55,7 +54,7 @@ class DslIntegrationTest {
     
     @Test
     void testJavaDslWithAuthentication() {
-        TestCaseBuilder builder = new TestCaseBuilderImpl();
+        TestCaseBuilder builder = new TestCaseBuilder();
         
         TestCase testCase = builder.testCase("Auth Test", spec -> {
             spec.basicAuth(basicAuth -> {
@@ -82,7 +81,7 @@ class DslIntegrationTest {
     
     @Test
     void testJavaDslWithRequestBody() {
-        TestCaseBuilder builder = new TestCaseBuilderImpl();
+        TestCaseBuilder builder = new TestCaseBuilder();
         
         TestCase testCase = builder.testCase("Request Body Test", spec -> {
             spec.post(postStep -> {
@@ -110,7 +109,7 @@ class DslIntegrationTest {
     
     @Test
     void testJavaDslWithResponseBodyAssertions() {
-        TestCaseBuilder builder = new TestCaseBuilderImpl();
+        TestCaseBuilder builder = new TestCaseBuilder();
         
         TestCase testCase = builder.testCase("Response Body Test", spec -> {
             spec.get(getStep -> {
@@ -131,7 +130,7 @@ class DslIntegrationTest {
     
     @Test
     void testJavaDslContextUsage() {
-        TestCaseBuilder builder = new TestCaseBuilderImpl();
+        TestCaseBuilder builder = new TestCaseBuilder();
         
         TestCase testCase = builder.testCase("Context Test", spec -> {
             spec.script("setup", () -> {
@@ -157,7 +156,7 @@ class DslIntegrationTest {
     
     @Test
     void testJavaDslComplexScenario() {
-        TestCaseBuilder builder = new TestCaseBuilderImpl();
+        TestCaseBuilder builder = new TestCaseBuilder();
         
         TestCase testCase = builder.testCase("Complex API Test", spec -> {
             // Setup

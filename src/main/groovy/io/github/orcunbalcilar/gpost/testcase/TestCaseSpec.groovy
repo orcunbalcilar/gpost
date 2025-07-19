@@ -22,14 +22,17 @@ class TestCaseSpec implements HasAuth {
         PostTestStep postTestStep = new PostTestStep(context, closure)
         closure.delegate = postTestStep
         closure.setResolveStrategy(Closure.DELEGATE_ONLY)
+        closure() // Execute the closure to initialize the step
+        postTestStep.markInitialized()
         testCase << postTestStep
     }
 
     void get(@DelegatesTo(value = GetTestStep, strategy = Closure.DELEGATE_ONLY) Closure closure) {
-        closure.curry(context)
         GetTestStep getTestStep = new GetTestStep(context, closure)
         closure.delegate = getTestStep
         closure.setResolveStrategy(Closure.DELEGATE_ONLY)
+        closure() // Execute the closure to initialize the step
+        getTestStep.markInitialized()
         testCase << getTestStep
     }
 
@@ -37,6 +40,8 @@ class TestCaseSpec implements HasAuth {
         PutTestStep putTestStep = new PutTestStep(context, closure)
         closure.delegate = putTestStep
         closure.setResolveStrategy(Closure.DELEGATE_ONLY)
+        closure() // Execute the closure to initialize the step
+        putTestStep.markInitialized()
         testCase << putTestStep
     }
 

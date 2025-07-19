@@ -13,7 +13,7 @@ class TestCaseBuilderImplTest {
     
     @BeforeEach
     void setUp() {
-        builder = new TestCaseBuilderImpl();
+        builder = new TestCaseBuilder();
     }
     
     @Test

@@ -1,8 +1,9 @@
 package OnlineTicket
 
 
-import io.github.orcunbalcilar.gpost.JUnit5Test
 import io.github.orcunbalcilar.gpost.testcase.TestCase
+import io.github.orcunbalcilar.gpost.test.BaseGroovyWireMockTest
+import org.junit.jupiter.api.Test
 
 import static io.github.orcunbalcilar.gpost.testcase.TestCaseBuilder.testCase
 
@@ -10,13 +11,17 @@ import static io.github.orcunbalcilar.gpost.testcase.TestCaseBuilder.testCase
  * Test using WireMock virtual services instead of external APIs.
  * This test has been updated to use a mock URL instead of external services.
  */
-class GetAvailabilityTest extends JUnit5Test {
+class GetAvailabilityTest extends BaseGroovyWireMockTest {
 
-    @Override
+    @Test
+    void run() {
+        TestCase testCase = create()
+        testCase.run()
+        assert testCase.status.name() == 'PASSED'
+    }
+
     TestCase create() {
-        // Use localhost mock instead of external service
-        def mockUrl = "http://localhost:8090"
-        
+        String mockUrl = getBaseUrl()
         testCase "LinkedIn Search Test", {
             script("setUbiNum") {
                 log.info("Script-1 is running")

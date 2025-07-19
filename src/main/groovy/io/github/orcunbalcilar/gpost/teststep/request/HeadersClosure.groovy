@@ -18,11 +18,24 @@ class HeadersClosure implements ContextAccess {
     }
 
     def methodMissing(String name, def args) {
-        return headers.put(name, ((Object[]) args)?[0].toString())
+        Object[] argsArray = args as Object[]
+        if (argsArray && argsArray.length > 0) {
+            return headers.put(name, argsArray[0].toString())
+        } else {
+            return headers.put(name, "")
+        }
     }
 
     Map<String, String> call() {
         closure.call()
         headers
+    }
+    
+    void run() {
+        closure.call()
+    }
+    
+    Map<String, String> result() {
+        return headers
     }
 }
