@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "PUT",
+    "url": "/put"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\n  \"args\": {},\n  \"data\": \"{\\\"status\\\": \\\"updated\\\"}\",\n  \"headers\": {\n    \"Content-Type\": \"application/json\"\n  },\n  \"json\": {\n    \"status\": \"updated\"\n  },\n  \"origin\": \"127.0.0.1\",\n  \"url\": \"{{request.requestLine.baseUrl}}/put\"\n}"
+  }
+}

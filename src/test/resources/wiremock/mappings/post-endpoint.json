@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/post"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\n  \"args\": {},\n  \"data\": \"{\\\"message\\\": \\\"Hello from Groovy DSL\\\"}\",\n  \"files\": {},\n  \"form\": {},\n  \"headers\": {\n    \"Accept\": \"application/json\",\n    \"Content-Type\": \"application/json\"\n  },\n  \"json\": {\n    \"message\": \"Hello from Groovy DSL\"\n  },\n  \"origin\": \"127.0.0.1\",\n  \"url\": \"{{request.requestLine.baseUrl}}/post\"\n}",
+    "transformers": ["response-template"]
+  }
+}

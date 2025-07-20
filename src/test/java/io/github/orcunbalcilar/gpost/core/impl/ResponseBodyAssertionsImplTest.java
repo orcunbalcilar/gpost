@@ -1,182 +1,360 @@
 package io.github.orcunbalcilar.gpost.core.impl;
 
-import io.github.orcunbalcilar.gpost.core.ResponseBodyAssertions;
 import io.github.orcunbalcilar.gpost.core.TestCaseRunContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for ResponseBodyAssertionsImpl.
+ * Tests response body assertion functionality including various assertion types.
+ */
 class ResponseBodyAssertionsImplTest {
+
+    private ResponseBodyAssertionsImpl responseBodyAssertions;
     
-    private TestCaseRunContext context;
-    
+    @Mock
+    private TestCaseRunContext mockContext;
+
     @BeforeEach
     void setUp() {
-        context = new TestCaseRunContextImpl();
+        MockitoAnnotations.openMocks(this);
     }
-    
+
     @Test
-    void testEqualsToSuccess() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("test content", context);
-        
-        assertSame(assertions, assertions.equalsTo("test content"));
+    void shouldCreateWithActualAndContext() {
+        // Given
+        String actual = "test response";
+
+        // When
+        ResponseBodyAssertionsImpl assertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // Then
+        assertNotNull(assertions);
+        assertEquals(actual, assertions.getActual());
     }
-    
+
     @Test
-    void testEqualsToFailure() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("test content", context);
-        
-        AssertionError error = assertThrows(AssertionError.class, () -> 
-            assertions.equalsTo("different content"));
-        assertTrue(error.getMessage().contains("Expected: different content"));
-        assertTrue(error.getMessage().contains("but was: test content"));
+    void shouldAssertEqualsToWithString() {
+        // Given
+        String actual = "Hello World";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        ResponseBodyAssertionsImpl result = (ResponseBodyAssertionsImpl) responseBodyAssertions.equalsTo("Hello World");
+        assertSame(responseBodyAssertions, result); // Should return same instance for fluent API
     }
-    
+
     @Test
-    void testContainsSuccess() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello World", context);
-        
-        assertSame(assertions, assertions.contains("Hello"));
-        assertSame(assertions, assertions.contains("World"));
-        assertSame(assertions, assertions.contains("lo Wo"));
+    void shouldFailEqualsToWithDifferentValue() {
+        // Given
+        String actual = "Hello World";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        AssertionError exception = assertThrows(AssertionError.class, () -> {
+            responseBodyAssertions.equalsTo("Hello Universe");
+        });
+        assertTrue(exception.getMessage().contains("Expected: Hello Universe"));
+        assertTrue(exception.getMessage().contains("but was: Hello World"));
     }
-    
+
     @Test
-    void testContainsFailure() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello World", context);
-        
-        AssertionError error = assertThrows(AssertionError.class, () -> 
-            assertions.contains("Goodbye"));
-        assertTrue(error.getMessage().contains("Expected response body to contain: Goodbye"));
+    void shouldAssertContainsText() {
+        // Given
+        String actual = "The quick brown fox jumps over the lazy dog";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.contains("quick brown");
+        });
     }
-    
+
     @Test
-    void testStartsWithSuccess() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello World", context);
-        
-        assertSame(assertions, assertions.startsWith("Hello"));
-        assertSame(assertions, assertions.startsWith("H"));
+    void shouldFailContainsWithMissingText() {
+        // Given
+        String actual = "The quick brown fox";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        AssertionError exception = assertThrows(AssertionError.class, () -> {
+            responseBodyAssertions.contains("lazy dog");
+        });
+        assertTrue(exception.getMessage().contains("Expected response body to contain: lazy dog"));
     }
-    
+
     @Test
-    void testStartsWithFailure() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello World", context);
-        
-        AssertionError error = assertThrows(AssertionError.class, () -> 
-            assertions.startsWith("World"));
-        assertTrue(error.getMessage().contains("Expected response body to start with: World"));
+    void shouldAssertStartsWith() {
+        // Given
+        String actual = "Hello World";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.startsWith("Hello");
+        });
     }
-    
+
     @Test
-    void testEndsWithSuccess() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello World", context);
-        
-        assertSame(assertions, assertions.endsWith("World"));
-        assertSame(assertions, assertions.endsWith("d"));
+    void shouldFailStartsWithWrongPrefix() {
+        // Given
+        String actual = "Hello World";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        AssertionError exception = assertThrows(AssertionError.class, () -> {
+            responseBodyAssertions.startsWith("World");
+        });
+        assertTrue(exception.getMessage().contains("Expected response body to start with: World"));
     }
-    
+
     @Test
-    void testEndsWithFailure() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello World", context);
-        
-        AssertionError error = assertThrows(AssertionError.class, () -> 
-            assertions.endsWith("Hello"));
-        assertTrue(error.getMessage().contains("Expected response body to end with: Hello"));
+    void shouldAssertEndsWith() {
+        // Given
+        String actual = "Hello World";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.endsWith("World");
+        });
     }
-    
+
     @Test
-    void testMatchesSuccess() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello123", context);
-        
-        assertSame(assertions, assertions.matches("Hello\\d+"));
-        assertSame(assertions, assertions.matches(".*123"));
+    void shouldFailEndsWithWrongSuffix() {
+        // Given
+        String actual = "Hello World";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        AssertionError exception = assertThrows(AssertionError.class, () -> {
+            responseBodyAssertions.endsWith("Hello");
+        });
+        assertTrue(exception.getMessage().contains("Expected response body to end with: Hello"));
     }
-    
+
     @Test
-    void testMatchesFailure() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello123", context);
-        
-        AssertionError error = assertThrows(AssertionError.class, () -> 
-            assertions.matches("\\d+"));
-        assertTrue(error.getMessage().contains("Expected response body to match pattern"));
+    void shouldAssertMatchesPattern() {
+        // Given
+        String actual = "user123";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.matches("user\\d+");
+        });
     }
-    
+
     @Test
-    void testSizeSuccess() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello", context);
-        
-        assertSame(assertions, assertions.size(5));
+    void shouldFailMatchesWithInvalidPattern() {
+        // Given
+        String actual = "user123";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        AssertionError exception = assertThrows(AssertionError.class, () -> {
+            responseBodyAssertions.matches("admin\\d+");
+        });
+        assertTrue(exception.getMessage().contains("Expected response body to match pattern: admin\\d+"));
     }
-    
+
     @Test
-    void testSizeFailure() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello", context);
-        
-        AssertionError error = assertThrows(AssertionError.class, () -> 
-            assertions.size(3));
-        assertTrue(error.getMessage().contains("Expected response body size: 3"));
-        assertTrue(error.getMessage().contains("but was: 5"));
+    void shouldAssertSizeCorrectly() {
+        // Given
+        String actual = "Hello";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.size(5);
+        });
     }
-    
+
     @Test
-    void testIsEmptySuccess() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("", context);
-        
-        assertSame(assertions, assertions.isEmpty());
+    void shouldFailSizeWithWrongLength() {
+        // Given
+        String actual = "Hello";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        AssertionError exception = assertThrows(AssertionError.class, () -> {
+            responseBodyAssertions.size(10);
+        });
+        assertTrue(exception.getMessage().contains("Expected response body size: 10"));
+        assertTrue(exception.getMessage().contains("but was: 5"));
     }
-    
+
     @Test
-    void testIsEmptyFailure() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("not empty", context);
-        
-        AssertionError error = assertThrows(AssertionError.class, () -> 
-            assertions.isEmpty());
-        assertTrue(error.getMessage().contains("Expected response body to be empty"));
+    void shouldAssertIsEmpty() {
+        // Given
+        String actual = "";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.isEmpty();
+        });
     }
-    
+
     @Test
-    void testIsNotEmptySuccess() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("not empty", context);
-        
-        assertSame(assertions, assertions.isNotEmpty());
+    void shouldFailIsEmptyWithNonEmptyString() {
+        // Given
+        String actual = "Not Empty";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        AssertionError exception = assertThrows(AssertionError.class, () -> {
+            responseBodyAssertions.isEmpty();
+        });
+        assertTrue(exception.getMessage().contains("Expected response body to be empty"));
+        assertTrue(exception.getMessage().contains("but was: Not Empty"));
     }
-    
+
     @Test
-    void testIsNotEmptyFailure() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("", context);
-        
-        AssertionError error = assertThrows(AssertionError.class, () -> 
-            assertions.isNotEmpty());
-        assertTrue(error.getMessage().contains("Expected response body to not be empty"));
+    void shouldAssertIsNotEmpty() {
+        // Given
+        String actual = "Not Empty";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.isNotEmpty();
+        });
     }
-    
+
     @Test
-    void testGetActual() {
-        String actualContent = "test content";
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl(actualContent, context);
-        
-        assertEquals(actualContent, assertions.getActual());
+    void shouldFailIsNotEmptyWithEmptyString() {
+        // Given
+        String actual = "";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        AssertionError exception = assertThrows(AssertionError.class, () -> {
+            responseBodyAssertions.isNotEmpty();
+        });
+        assertEquals("Expected response body to not be empty", exception.getMessage());
     }
-    
+
     @Test
-    void testNullActual() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl(null, context);
+    void shouldHandleNullActualValue() {
+        // Given
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(null, mockContext);
+
+        // When & Then
+        assertNull(responseBodyAssertions.getActual());
         
-        assertNull(assertions.getActual());
-        assertDoesNotThrow(() -> assertions.isEmpty());
-        assertDoesNotThrow(() -> assertions.size(0));
+        // Should treat null as empty string for assertions
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.isEmpty();
+        });
+        
+        AssertionError exception = assertThrows(AssertionError.class, () -> {
+            responseBodyAssertions.isNotEmpty();
+        });
+        assertEquals("Expected response body to not be empty", exception.getMessage());
     }
-    
+
     @Test
-    void testMethodChaining() {
-        ResponseBodyAssertions assertions = new ResponseBodyAssertionsImpl("Hello World", context);
+    void shouldHandleNonStringActualValue() {
+        // Given
+        Integer actual = 12345;
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertEquals(actual, responseBodyAssertions.getActual());
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.contains("234");
+            responseBodyAssertions.startsWith("123");
+            responseBodyAssertions.endsWith("345");
+            responseBodyAssertions.size(5);
+        });
+    }
+
+    @Test
+    void shouldChainAssertions() {
+        // Given
+        String actual = "Hello World Test";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            ResponseBodyAssertionsImpl result = (ResponseBodyAssertionsImpl) responseBodyAssertions
+                .contains("World")
+                .startsWith("Hello")
+                .endsWith("Test")
+                .size(16)
+                .isNotEmpty();
+                
+            assertSame(responseBodyAssertions, result);
+        });
+    }
+
+    @Test
+    void shouldHandleComplexRegexPattern() {
+        // Given
+        String actual = "user@example.com";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.matches("\\w+@\\w+\\.\\w+");
+        });
+    }
+
+    @Test
+    void shouldHandleSpecialCharacters() {
+        // Given
+        String actual = "Special chars: àáâãäåæçèéêë 🌍";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions
+                .contains("àáâãäåæçèéêë")
+                .contains("🌍")
+                .startsWith("Special")
+                .endsWith("🌍");
+        });
+    }
+
+    @Test
+    void shouldHandleLargeContent() {
+        // Given
+        StringBuilder largeContent = new StringBuilder();
+        for (int i = 0; i < 1000; i++) {
+            largeContent.append("Large content line ").append(i).append(". ");
+        }
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(largeContent.toString(), mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions
+                .contains("Large content line 500")
+                .startsWith("Large content line 0")
+                .endsWith("999. ")
+                .isNotEmpty();
+        });
+        assertTrue(responseBodyAssertions.getActual().toString().length() > 10000);
+    }
+
+    @Test
+    void shouldHandleCaseSensitiveOperations() {
+        // Given
+        String actual = "Hello World";
+        responseBodyAssertions = new ResponseBodyAssertionsImpl(actual, mockContext);
+
+        // When & Then
+        assertDoesNotThrow(() -> {
+            responseBodyAssertions.contains("Hello");
+        });
         
-        // Test that methods can be chained together
-        assertSame(assertions, assertions
-            .contains("Hello")
-            .startsWith("Hello")
-            .endsWith("World")
-            .size(11));
+        AssertionError exception = assertThrows(AssertionError.class, () -> {
+            responseBodyAssertions.contains("hello");
+        });
+        assertTrue(exception.getMessage().contains("Expected response body to contain: hello"));
     }
 }

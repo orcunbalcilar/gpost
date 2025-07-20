@@ -5,14 +5,15 @@ import io.github.orcunbalcilar.gpost.core.TestCase;
 import io.github.orcunbalcilar.gpost.core.TestStep;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Java implementation of TestCase.
  */
 public class TestCaseImpl implements TestCase {
     
-    private static final Logger logger = Logger.getLogger(TestCaseImpl.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(TestCaseImpl.class);
     
     private String name;
     private final List<TestStep> testSteps = new ArrayList<>();
@@ -88,7 +89,7 @@ public class TestCaseImpl implements TestCase {
         } else if (status == TestItemStatus.SKIPPED) {
             logger.info(name + " -> SKIPPED");
         } else {
-            logger.severe(name + " -> FAILED");
+            logger.error(name + " -> FAILED");
             this.status = TestItemStatus.FAILED;
         }
     }

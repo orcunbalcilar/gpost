@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/status/404"
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\n  \"error\": \"Not Found\",\n  \"message\": \"The requested resource was not found\"\n}"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/status/400"
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\n  \"error\": \"Bad Request\",\n  \"message\": \"The request was invalid\"\n}"
+  }
+}

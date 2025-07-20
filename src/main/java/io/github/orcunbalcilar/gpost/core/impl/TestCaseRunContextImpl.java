@@ -3,14 +3,15 @@ package io.github.orcunbalcilar.gpost.core.impl;
 import io.github.orcunbalcilar.gpost.core.TestCaseRunContext;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of TestCaseRunContext.
  */
 public class TestCaseRunContextImpl implements TestCaseRunContext {
     
-    private static final Logger logger = Logger.getLogger(TestCaseRunContextImpl.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(TestCaseRunContextImpl.class);
     
     private final Map<String, Object> properties = new HashMap<>();
     

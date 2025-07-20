@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/data/json"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\n  \"id\": 1,\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"active\": true,\n  \"roles\": [\"user\", \"admin\"]\n}"
+  }
+}

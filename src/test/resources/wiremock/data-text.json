@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/data/text"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/plain"
+    },
+    "body": "Hello, World! This is plain text response."
+  }
+}

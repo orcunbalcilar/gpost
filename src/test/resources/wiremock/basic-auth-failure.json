@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/basic-auth/user/pass"
+  },
+  "response": {
+    "status": 401,
+    "headers": {
+      "WWW-Authenticate": "Basic realm=\"test\""
+    },
+    "body": "Unauthorized"
+  },
+  "priority": 2
+}

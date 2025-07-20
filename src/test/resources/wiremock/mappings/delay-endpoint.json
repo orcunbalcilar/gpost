@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/delay"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\"delayed\": true}",
+    "fixedDelayMilliseconds": 5000
+  }
+}

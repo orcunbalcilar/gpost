@@ -3,9 +3,6 @@
     <Console name="Console" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss:SSS} %-5p [%c{1}] %m%n"/>
     </Console>
-    <Console name="Console-2" target="SYSTEM_OUT">
-      <PatternLayout pattern="%m%n"/>
-    </Console>
     <ReportPortalLog4j2Appender name="ReportPortalAppender">
       <PatternLayout
         pattern="%d [%t] %-5level %logger{36} - %msg%n%throwable"/>

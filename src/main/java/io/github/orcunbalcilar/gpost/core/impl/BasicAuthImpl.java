@@ -2,11 +2,15 @@ package io.github.orcunbalcilar.gpost.core.impl;
 
 import io.github.orcunbalcilar.gpost.core.BasicAuth;
 import java.util.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of BasicAuth.
  */
 public class BasicAuthImpl implements BasicAuth {
+    
+    private static final Logger logger = LoggerFactory.getLogger(BasicAuthImpl.class);
     
     private String username;
     private String password;
@@ -45,7 +49,7 @@ public class BasicAuthImpl implements BasicAuth {
             String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
             // This would be applied to the actual HTTP request
             // Implementation depends on the HTTP client being used
-            System.out.println("Applying Basic Auth: " + encodedCredentials);
+            logger.debug("Applying Basic Auth: {}", encodedCredentials);
         }
     }
 }

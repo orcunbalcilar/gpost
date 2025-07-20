@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/data/xml"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/xml"
+    },
+    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<user>\n    <id>1</id>\n    <name>Test User</name>\n    <email>test@example.com</email>\n    <active>true</active>\n    <roles>\n        <role>user</role>\n        <role>admin</role>\n    </roles>\n</user>"
+  }
+}

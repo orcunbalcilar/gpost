@@ -2,18 +2,16 @@ package io.github.orcunbalcilar.gpost.integration;
 
 import io.github.orcunbalcilar.gpost.core.TestCase;
 import io.github.orcunbalcilar.gpost.core.TestCaseBuilder;
-import io.github.orcunbalcilar.gpost.test.BaseWireMockTest;
 import io.github.orcunbalcilar.gpost.TestItemStatus;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static io.github.orcunbalcilar.gpost.test.TestConstants.*;
 
 /**
  * Integration tests demonstrating both Java and Groovy DSLs working together.
  * Tests both DSL structure creation and actual HTTP test execution.
  */
-class DslIntegrationTest extends BaseWireMockTest {
+class DslIntegrationTest extends IntegrationTest {
     
     @Test
     void testJavaDslBasicUsage() {
@@ -21,11 +19,11 @@ class DslIntegrationTest extends BaseWireMockTest {
         
         TestCase testCase = builder.testCase("Java DSL Test", spec -> {
             spec.script("setup", () -> {
-                spec.getContext().setProperty("baseUrl", baseUrl);
+                spec.getContext().setProperty("baseUrl", getBaseUrl());
             });
             
             spec.get(getStep -> {
-                getStep.url(baseUrl + "/get")
+                getStep.url(getBaseUrl() + "/get")
                        .name("Get users")
                        .request(request -> {
                            request.header("Accept", "application/json")
@@ -38,7 +36,7 @@ class DslIntegrationTest extends BaseWireMockTest {
             });
             
             spec.post(postStep -> {
-                postStep.url(baseUrl + "/post")
+                postStep.url(getBaseUrl() + "/post")
                         .name("Create user")
                         .requestWithBody(request -> {
                             request.jsonBody("{\"name\": \"John Doe\", \"email\": \"john@example.com\"}")
@@ -78,7 +76,7 @@ class DslIntegrationTest extends BaseWireMockTest {
             });
             
             spec.get(getStep -> {
-                getStep.url(baseUrl + "/secure")
+                getStep.url(getBaseUrl() + "/secure")
                        .name("Secure endpoint")
                        .request(request -> {
                            request.basicAuth(auth -> {
@@ -100,7 +98,7 @@ class DslIntegrationTest extends BaseWireMockTest {
         
         TestCase testCase = builder.testCase("Request Body Test", spec -> {
             spec.post(postStep -> {
-                postStep.url(baseUrl + "/api/data")
+                postStep.url(getBaseUrl() + "/api/data")
                         .name("POST with body")
                         .requestWithBody(request -> {
                             request.requestBody(bodyBuilder -> {
@@ -110,7 +108,7 @@ class DslIntegrationTest extends BaseWireMockTest {
             });
             
             spec.put(putStep -> {
-                putStep.url(baseUrl + "/api/data/1")
+                putStep.url(getBaseUrl() + "/api/data/1")
                        .name("PUT with XML body")
                        .requestWithBody(request -> {
                            request.xmlBody("<data>test</data>");
@@ -128,7 +126,7 @@ class DslIntegrationTest extends BaseWireMockTest {
         
         TestCase testCase = builder.testCase("Response Body Test", spec -> {
             spec.get(getStep -> {
-                getStep.url(baseUrl + "/api/json")
+                getStep.url(getBaseUrl() + "/api/json")
                        .name("JSON response test")
                        .assertions(assertions -> {
                            assertions.statusCode(200)
@@ -151,11 +149,11 @@ class DslIntegrationTest extends BaseWireMockTest {
             spec.script("setup", () -> {
                 spec.getContext().setProperty("username", "testuser");
                 spec.getContext().setProperty("password", "testpass");
-                spec.getContext().setProperty("baseUrl", baseUrl);
+                spec.getContext().setProperty("baseUrl", getBaseUrl());
             });
             
             spec.get(getStep -> {
-                getStep.url(baseUrl + "/api/profile")
+                getStep.url(getBaseUrl() + "/api/profile")
                        .name("Get profile")
                        .request(request -> {
                            String username = spec.getContext().getProperty("username", String.class);
@@ -176,13 +174,13 @@ class DslIntegrationTest extends BaseWireMockTest {
         TestCase testCase = builder.testCase("Complex API Test", spec -> {
             // Setup
             spec.script("setup", () -> {
-                spec.getContext().setProperty("baseUrl", baseUrl);
+                spec.getContext().setProperty("baseUrl", getBaseUrl());
                 spec.getContext().setProperty("authToken", "bearer-token-123");
             });
             
             // Login
             spec.post(postStep -> {
-                postStep.url(baseUrl + "/auth/login")
+                postStep.url(getBaseUrl() + "/auth/login")
                         .name("Login")
                         .requestWithBody(request -> {
                             request.jsonBody("{\"username\": \"admin\", \"password\": \"secret\"}")
@@ -197,7 +195,7 @@ class DslIntegrationTest extends BaseWireMockTest {
             
             // Get user profile
             spec.get(getStep -> {
-                getStep.url(baseUrl + "/api/profile")
+                getStep.url(getBaseUrl() + "/api/profile")
                        .name("Get profile")
                        .request(request -> {
                            request.header("Authorization", "Bearer " + spec.getContext().getProperty("authToken"));
@@ -210,7 +208,7 @@ class DslIntegrationTest extends BaseWireMockTest {
             
             // Update profile
             spec.put(putStep -> {
-                putStep.url(baseUrl + "/api/profile")
+                putStep.url(getBaseUrl() + "/api/profile")
                        .name("Update profile")
                        .requestWithBody(request -> {
                            request.jsonBody("{\"name\": \"Updated Name\", \"email\": \"updated@example.com\"}")

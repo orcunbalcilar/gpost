@@ -1,0 +1,11 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/bearer"
+  },
+  "response": {
+    "status": 403,
+    "body": "Invalid token"
+  },
+  "priority": 2
+}

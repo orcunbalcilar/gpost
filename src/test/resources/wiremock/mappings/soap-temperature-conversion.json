@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/webservicesserver/TempConvert.asmx"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/xml; charset=utf-8"
+    },
+    "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n    <soap:Body>\n        <CelsiusToFahrenheitResponse>\n            <CelsiusToFahrenheitResult>32</CelsiusToFahrenheitResult>\n        </CelsiusToFahrenheitResponse>\n    </soap:Body>\n</soap:Envelope>"
+  }
+}

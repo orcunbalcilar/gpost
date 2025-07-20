@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "DELETE",
+    "url": "/delete"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\n  \"args\": {},\n  \"headers\": {},\n  \"origin\": \"127.0.0.1\",\n  \"url\": \"{{request.requestLine.baseUrl}}/delete\"\n}",
+    "transformers": ["response-template"]
+  }
+}

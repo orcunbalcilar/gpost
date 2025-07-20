@@ -120,7 +120,17 @@ abstract class HttpTestStep extends TestStep implements HasAuth {
     }
 
     private String prettyPrintResponse() {
-        return response.getContentType() == ContentType.APPLICATION_JSON ? JsonOutput.prettyPrint(response.bodyText) : XmlUtil.serialize(response.bodyText)
+        try {
+            if (response.getContentType() == ContentType.APPLICATION_JSON) {
+                return JsonOutput.prettyPrint(response.bodyText)
+            } else if (response.getContentType()?.getMimeType()?.contains("xml")) {
+                return XmlUtil.serialize(response.bodyText)
+            } else {
+                return response.bodyText
+            }
+        } catch (Exception e) {
+            return response.bodyText
+        }
     }
 
     Closure<Void> getAssertable() {

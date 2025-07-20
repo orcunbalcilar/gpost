@@ -2,16 +2,18 @@ package io.github.orcunbalcilar.gpost.integration;
 
 import io.github.orcunbalcilar.gpost.core.TestCase;
 import io.github.orcunbalcilar.gpost.core.TestCaseBuilder;
-import io.github.orcunbalcilar.gpost.test.BaseWireMockTest;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static io.github.orcunbalcilar.gpost.test.TestConstants.*;
 
 /**
  * Integration test demonstrating both DSLs share the same underlying core implementation.
  */
-public class BothDslsIntegrationTest extends BaseWireMockTest {
+public class BothDslsIntegrationTest extends IntegrationTest {
+    
+    private static final Logger logger = LoggerFactory.getLogger(BothDslsIntegrationTest.class);
     
     @Test
     public void testJavaDslWithSimplifiedArchitecture() {
@@ -20,10 +22,10 @@ public class BothDslsIntegrationTest extends BaseWireMockTest {
         
         TestCase testCase = builder.testCase("Simplified Architecture Test", spec -> {
             spec.script("setup", () -> {
-                System.out.println("Java DSL with simplified architecture");
+                logger.info("Java DSL with simplified architecture");
             });
             spec.get(step -> {
-                step.url(baseUrl + "/get");
+                step.url(getBaseUrl() + "/get");
                 step.name("Simple GET request");
             });
         });
@@ -36,8 +38,8 @@ public class BothDslsIntegrationTest extends BaseWireMockTest {
         // Verify we're using concrete classes, not interfaces
         assertEquals("TestCaseImpl", testCase.getClass().getSimpleName());
         
-        System.out.println("✅ Java DSL works with simplified architecture (no unnecessary interfaces)!");
-        System.out.println("✅ TestCase class: " + testCase.getClass().getSimpleName());
-        System.out.println("✅ TestCaseBuilder is now a concrete class, not an interface");
+        logger.info("✅ Java DSL works with simplified architecture (no unnecessary interfaces)!");
+        logger.info("✅ TestCase class: {}", testCase.getClass().getSimpleName());
+        logger.info("✅ TestCaseBuilder is now a concrete class, not an interface");
     }
 }

@@ -13,7 +13,7 @@ class ResponseBodyAssertions {
         this.context = context
     }
 
-    void equals(Object actual, Object expected) {
+    void equals(def actual, def expected) {
         assert actual == expected, "Expected: ${expected}, actual: ${actual}"
     }
 

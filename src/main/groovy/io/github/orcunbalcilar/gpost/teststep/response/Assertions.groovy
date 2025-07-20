@@ -54,7 +54,7 @@ class Assertions {
         log.info("Status code assertion : ${statusCode}")
     }
 
-    void equals(String actual, String expected) {
+    void equals(def actual, def expected) {
         assert actual == expected, "Expected value: ${expected}, actual: ${actual}"
     }
 

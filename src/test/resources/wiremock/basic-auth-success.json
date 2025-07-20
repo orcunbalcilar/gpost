@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/basic-auth/user/pass",
+    "basicAuth": {
+      "username": "user",
+      "password": "pass"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\n  \"authenticated\": true,\n  \"user\": \"user\"\n}"
+  }
+}

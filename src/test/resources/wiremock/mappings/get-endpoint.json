@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/get"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\n  \"args\": {},\n  \"headers\": {\n    \"Accept\": \"application/json\",\n    \"User-Agent\": \"Groovy-DSL-Test\"\n  },\n  \"origin\": \"127.0.0.1\",\n  \"url\": \"{{request.requestLine.baseUrl}}/get\"\n}",
+    "transformers": ["response-template"]
+  }
+}
